@@ -10,7 +10,8 @@ def getImageURL(query):
     request = urllib2.Request(url, None, {'Referer': 'http://google.com'})
     response = urllib2.urlopen(request)
     results = simplejson.load(response)
-    return results['responseData']['results'][0]['unescapedUrl']
+    if (len(results['responseData']['results']) > 0):
+        return results['responseData']['results'][0]['unescapedUrl']
 
 file_ext = ["mkv", "avi", "mp4"]
 
@@ -27,8 +28,9 @@ for line in sys.stdin:
     for ext in file_ext:
         if ext in BASE_FILE:
             ICAPTITLE = re.sub("\.", "", BASE_FILE.split(ext)[0]).strip()
-            if not os.path.isfile("gen/" + ICAPTITLE+".jpg"):
-                os.system("wget -O gen/" + ICAPTITLE + ".jpg " + getImageURL(ICAPTITLE + " poster"))
+            URL = getImageURL(ICAPTITLE + " poster");
+            if not os.path.isfile("gen/" + ICAPTITLE+".jpg") and URL is not None:
+                os.system("wget -O \"gen/" + ICAPTITLE + ".jpg\" \"" + URL + "\"")
             print "<img height=350px src=" + ICAPTITLE + ".jpg />"
             break
             
