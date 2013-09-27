@@ -27,9 +27,9 @@ for line in sys.stdin:
     for ext in file_ext:
         if ext in BASE_FILE:
             ICAPTITLE = re.sub("\.", "", BASE_FILE.split(ext)[0]).strip()
-            if not os.path.isfile(ICAPTITLE+".jpg"):
-                os.system("wget -O " + ICAPTITLE + ".jpg " + getImageURL(ICAPTITLE))
-            print "<a href='/Desktop/sync/" + ICAPTITLE + "'><img height=350px src=" + ICAPTITLE + ".jpg /></a>"
+            if not os.path.isfile("gen/" + ICAPTITLE+".jpg"):
+                os.system("wget -O gen/" + ICAPTITLE + ".jpg " + getImageURL(ICAPTITLE + " poster"))
+            print "<img height=350px src=" + ICAPTITLE + ".jpg />"
             break
             
     time.sleep(1.5)
