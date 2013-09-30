@@ -32,7 +32,7 @@ for line in sys.stdin:
             URL = getImageURL(ICAPTITLE + " poster");
             if not os.path.isfile("gen/" + ICAPTITLE+".jpg") and URL is not None:
                 os.system("wget -O \"gen/" + ICAPTITLE + ".jpg\" \"" + URL + "\"")
-            print "<img height=350px src='" + ICAPTITLE + "'.jpg />"
+            print "<a href='/Desktop/Convert/"+ BASE_FILE +"'><img height=350px src='" + ICAPTITLE + "'.jpg /></a>"
             break
             
     time.sleep(1.5)
